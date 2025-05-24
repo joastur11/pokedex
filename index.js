@@ -1,5 +1,5 @@
 let offset = 0
-const limit = 30
+const limit = 15
 
 function mostrarListaPokemones (){
     fetch (`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`) 
@@ -9,8 +9,11 @@ function mostrarListaPokemones (){
             lista.innerHTML = ''
             data.results.forEach (pokemon=> {
                 const item = document.createElement('li');
-                item.textContent = pokemon.name;
-                item.dataset.url = pokemon.url;
+                    item.innerHTML = `
+                    <button class="btn btn-light w-100 text-start mb-2 text-capitalize" data-url="${pokemon.url}">
+                        ${pokemon.name}
+                    </button>
+                    `;
                 lista.appendChild(item);
             })
         })
@@ -20,9 +23,9 @@ function mostrarListaPokemones (){
     document.querySelector('#pagina').textContent = paginaActual
 
     if (offset === 0){
-        document.querySelector('#pagina-anterior').classList.add('hidden');
+        document.querySelector('#pagina-anterior').classList.add('d-none');
     } else {
-        document.querySelector('#pagina-anterior').classList.remove('hidden');
+        document.querySelector('#pagina-anterior').classList.remove('d-none');
     }
 }
 
@@ -41,7 +44,7 @@ document.querySelector('#pagina-siguiente').addEventListener('click', () => {
 });
 
 document.querySelector('#lista').addEventListener('click', (e) => {
-    if (e.target.tagName === 'LI') {            //o LI
+    if (e.target.tagName === 'BUTTON') {            
         const url = e.target.dataset.url;
         verDetallesPokemon(url);
     }
