@@ -1,5 +1,5 @@
 let offset = 0
-const limit = 30
+const limit = 15
 
 function mostrarListaPokemones (){
     fetch (`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`) 
@@ -9,8 +9,11 @@ function mostrarListaPokemones (){
             lista.innerHTML = ''
             data.results.forEach (pokemon=> {
                 const item = document.createElement('li');
-                item.textContent = pokemon.name;
-                item.dataset.url = pokemon.url;
+                    item.innerHTML = `
+                    <button class="btn btn-light w-100 text-start mb-2 text-capitalize" data-url="${pokemon.url}">
+                        ${pokemon.name}
+                    </button>
+                    `;
                 lista.appendChild(item);
             })
         })
@@ -20,9 +23,9 @@ function mostrarListaPokemones (){
     document.querySelector('#pagina').textContent = paginaActual
 
     if (offset === 0){
-        document.querySelector('#pagina-anterior').classList.add('hidden');
+        document.querySelector('#pagina-anterior').classList.add('d-none');
     } else {
-        document.querySelector('#pagina-anterior').classList.remove('hidden');
+        document.querySelector('#pagina-anterior').classList.remove('d-none');
     }
 }
 
@@ -41,7 +44,7 @@ document.querySelector('#pagina-siguiente').addEventListener('click', () => {
 });
 
 document.querySelector('#lista').addEventListener('click', (e) => {
-    if (e.target.tagName === 'LI') {            //o LI
+    if (e.target.tagName === 'BUTTON') {            
         const url = e.target.dataset.url;
         verDetallesPokemon(url);
     }
@@ -57,28 +60,25 @@ function verDetallesPokemon (url){
             data.types.forEach(tipoNombre => {
             tipos.push(tipoNombre.type.name);
             });
-            document.querySelector('#volver').classList.remove('hidden')
-            document.querySelector('#lista').classList.add('hidden')  
-            document.querySelector('#manejo-pagina').classList.add('hidden')      
+            document.querySelector('#volver').classList.remove('d-none')
+            document.querySelector('#lista').classList.add('d-none')  
+            document.querySelector('#manejo-pagina').classList.add('d-none')      
             $detalles.innerHTML = ''
             $detalles.innerHTML = `
-                <h2>${data.name}</h2>
-                <ul>
-                    <label> Tipos </label>
-                    ${tipos}
-                    <label> Altura </label>
-                    ${data.height}
-                    <label> Peso </label>
-                    ${data.weight}
-                </ul>
-                <img src="${data.sprites.front_default}" alt="${data.name}" />
-            `            
+                <div class="card text-center">
+                <img src="${data.sprites.front_default}" class="card-img-top mx-auto" style="width: 150px;" alt="${data.name}">
+                <div class="card-body">
+                    <h5 class="card-title">${data.name}</h5>
+                    <p class="card-text">Tipo: ${tipos}<br>Altura: ${data.height}<br>Peso: ${data.weight}</p>
+                </div>
+                </div>
+            `
         })
 }
 
 document.querySelector('#volver').addEventListener('click', (e) => {
     $detalles.innerHTML = ''
-    document.querySelector('#volver').classList.add('hidden')
-    document.querySelector('#lista').classList.remove('hidden')
-    document.querySelector('#manejo-pagina').classList.remove('hidden')      
+    document.querySelector('#volver').classList.add('d-none')
+    document.querySelector('#lista').classList.remove('d-none')
+    document.querySelector('#manejo-pagina').classList.remove('d-none')      
 })
