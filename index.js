@@ -1,5 +1,5 @@
 //opcional mio: pagina principal titulo y boton abrir para mostrar ahi las listas, estilo bootstrap
-//ocultar lista cuando se abran los detalles y boton de atras para volver a la lista
+// branch y estilo bootstrap 
 
 let offset = 0
 const limit = 30
@@ -50,15 +50,19 @@ document.querySelector('#lista').addEventListener('click', (e) => {
     }
 });
 
-function verDetallesPokemon (url){
+const $detalles = document.querySelector('#detalles-pokemon')  
+
+function verDetallesPokemon (url){                                 
     fetch(url)
         .then (respuesta => respuesta.json())
         .then (data => {
             let tipos = []
             data.types.forEach(tipoNombre => {
             tipos.push(tipoNombre.type.name);
-            }); 
-            const $detalles = document.querySelector('#detalles-pokemon')           
+            });
+            document.querySelector('#volver').classList.remove('hidden')
+            document.querySelector('#lista').classList.add('hidden')  
+            document.querySelector('#manejo-pagina').classList.add('hidden')      
             $detalles.innerHTML = ''
             $detalles.innerHTML = `
                 <h2>${data.name}</h2>
@@ -74,3 +78,10 @@ function verDetallesPokemon (url){
             `            
         })
 }
+
+document.querySelector('#volver').addEventListener('click', (e) => {
+    $detalles.innerHTML = ''
+    document.querySelector('#volver').classList.add('hidden')
+    document.querySelector('#lista').classList.remove('hidden')
+    document.querySelector('#manejo-pagina').classList.remove('hidden')      
+})
