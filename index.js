@@ -62,17 +62,14 @@ function verDetallesPokemon (url){
             document.querySelector('#manejo-pagina').classList.add('hidden')      
             $detalles.innerHTML = ''
             $detalles.innerHTML = `
-                <h2>${data.name}</h2>
-                <ul>
-                    <label> Tipos </label>
-                    ${tipos}
-                    <label> Altura </label>
-                    ${data.height}
-                    <label> Peso </label>
-                    ${data.weight}
-                </ul>
-                <img src="${data.sprites.front_default}" alt="${data.name}" />
-            `            
+                <div class="card text-center">
+                <img src="${data.sprites.front_default}" class="card-img-top mx-auto" style="width: 150px;" alt="${data.name}">
+                <div class="card-body">
+                    <h5 class="card-title">${data.name}</h5>
+                    <p class="card-text">Tipo: ${tipos}<br>Altura: ${data.height}<br>Peso: ${data.weight}</p>
+                </div>
+                </div>
+            `
         })
 }
 
