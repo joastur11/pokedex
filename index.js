@@ -57,9 +57,9 @@ function verDetallesPokemon (url){
             data.types.forEach(tipoNombre => {
             tipos.push(tipoNombre.type.name);
             });
-            document.querySelector('#volver').classList.remove('hidden')
-            document.querySelector('#lista').classList.add('hidden')  
-            document.querySelector('#manejo-pagina').classList.add('hidden')      
+            document.querySelector('#volver').classList.remove('d-none')
+            document.querySelector('#lista').classList.add('d-none')  
+            document.querySelector('#manejo-pagina').classList.add('d-none')      
             $detalles.innerHTML = ''
             $detalles.innerHTML = `
                 <div class="card text-center">
@@ -75,7 +75,7 @@ function verDetallesPokemon (url){
 
 document.querySelector('#volver').addEventListener('click', (e) => {
     $detalles.innerHTML = ''
-    document.querySelector('#volver').classList.add('hidden')
-    document.querySelector('#lista').classList.remove('hidden')
-    document.querySelector('#manejo-pagina').classList.remove('hidden')      
+    document.querySelector('#volver').classList.add('d-none')
+    document.querySelector('#lista').classList.remove('d-none')
+    document.querySelector('#manejo-pagina').classList.remove('d-none')      
 })
