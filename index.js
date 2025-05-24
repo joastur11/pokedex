@@ -1,6 +1,3 @@
-//opcional mio: pagina principal titulo y boton abrir para mostrar ahi las listas, estilo bootstrap
-// branch y estilo bootstrap 
-
 let offset = 0
 const limit = 30
 
