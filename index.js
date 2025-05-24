@@ -42,3 +42,35 @@ document.querySelector('#pagina-siguiente').addEventListener('click', () => {
   offset += limit;
   mostrarListaPokemones();
 });
+
+document.querySelector('#lista').addEventListener('click', (e) => {
+    if (e.target.tagName === 'LI') {            //o LI
+        const url = e.target.dataset.url;
+        verDetallesPokemon(url);
+    }
+});
+
+function verDetallesPokemon (url){
+    fetch(url)
+        .then (respuesta => respuesta.json())
+        .then (data => {
+            let tipos = []
+            data.types.forEach(tipoNombre => {
+            tipos.push(tipoNombre.type.name);
+            }); 
+            const $detalles = document.querySelector('#detalles-pokemon')           
+            $detalles.innerHTML = ''
+            $detalles.innerHTML = `
+                <h2>${data.name}</h2>
+                <ul>
+                    <label> Tipos </label>
+                    ${tipos}
+                    <label> Altura </label>
+                    ${data.height}
+                    <label> Peso </label>
+                    ${data.weight}
+                </ul>
+                <img src="${data.sprites.front_default}" alt="${data.name}" />
+            `            
+        })
+}
