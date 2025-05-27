@@ -76,7 +76,7 @@ function verDetallesPokemon (url){
         })
 }
 
-document.querySelector('#volver').addEventListener('click', (e) => {
+document.querySelector('#volver').addEventListener('click', () => {
     $detalles.innerHTML = ''
     document.querySelector('#volver').classList.add('d-none')
     document.querySelector('#lista').classList.remove('d-none')
