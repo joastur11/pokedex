@@ -4,8 +4,6 @@ export {paginaAnterior, paginaSiguiente, clickPokemon, botonVolver}
 import {verDetallesPokemon,cargarPagina} from './index.js'
 import {aumentarOffset, disminuirOffset} from './pagina.js'
 
-const $detalles = document.querySelector('#detalles-pokemon')  
-
 function paginaAnterior (){
     document.querySelector('#pagina-anterior').addEventListener('click', () => {
         disminuirOffset()
@@ -31,6 +29,7 @@ function clickPokemon (){
 
 function botonVolver (){
     document.querySelector('#volver').addEventListener('click', () => {
+        const $detalles = document.querySelector('#detalles-pokemon')  
         $detalles.innerHTML = ''
         document.querySelector('#volver').classList.add('d-none')
         document.querySelector('#lista').classList.remove('d-none')
