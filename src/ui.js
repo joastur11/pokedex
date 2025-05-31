@@ -1,8 +1,6 @@
 // funciones del dom
 export {mostrarListaPokemones, actualizarPagina, mostrarBotonAnterior, abrirDetalles}
 
-const $detalles = document.querySelector('#detalles-pokemon')  
-
 function mostrarListaPokemones(pokemones) {
     const lista = document.querySelector('#lista')
 
@@ -37,9 +35,13 @@ function abrirDetalles (data){
     data.types.forEach(tipoNombre => {
     tipos.push(tipoNombre.type.name);
     });
+
+    const $detalles = document.querySelector('#detalles-pokemon')
+
     document.querySelector('#volver').classList.remove('d-none')
     document.querySelector('#lista').classList.add('d-none')  
-    document.querySelector('#manejo-pagina').classList.add('d-none')      
+    document.querySelector('#manejo-pagina').classList.add('d-none')
+          
     $detalles.innerHTML = `
         <div class="card text-center">
         <img src="${data.sprites.front_default}" class="card-img-top mx-auto" style="width: 150px;" alt="${data.name}">

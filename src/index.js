@@ -41,4 +41,4 @@ async function cargarPagina() {
 }
 
 
-export {verDetallesPokemon, cargarPagina}
+export {mostrarPokemones, verDetallesPokemon, cargarPagina}
